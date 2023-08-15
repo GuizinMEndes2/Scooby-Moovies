@@ -16,7 +16,7 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::post('/login', [UserController::class, 'login'])->name('login');
