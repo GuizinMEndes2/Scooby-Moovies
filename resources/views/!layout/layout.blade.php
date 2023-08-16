@@ -7,7 +7,9 @@
     <title>@yield('title')</title>
 </head>
 <body>
+    <a href="{{ route('home') }}">
     <h1>Scooby-Mooves</h1>
+</a>
 
     @if (Auth::user())
 <div style="display: inline-block;">

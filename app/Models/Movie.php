@@ -12,12 +12,13 @@ class Movie extends Model
     protected $fillable = [
         'name',
         'sinopse',
+        'ano',
         'imagem',
         'link'
     ];
 
     public function categorias()
     {
-        return $this->belongsToMany(Movie::class, 'm-categorias', 'movie_id', 'categoria_id');
+        return $this->belongsToMany(Categoria::class, 'm-categorias', 'movie_id', 'categoria_id');
     }
 }

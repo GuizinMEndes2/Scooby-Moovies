@@ -7,15 +7,10 @@
 
 @foreach ($movie as $m)
 <div>
-    <img style="width: 150px; height: 200px; object-fit: cover;" src="{{$m->imagem}}" alt="{{$m->name}}">
+    <a href="{{ route('movie.page', $m->id) }}">
+        <img style="width: 150px; height: 200px; object-fit: cover;" src="{{$m->imagem}}" alt="{{$m->name}}">
+    </a>
     <p>{{$m->name}}</p>
-<p>
-    @if ($moviecat->cat->count() > 0)
-        {{ $moviecat->cat->pluck('name')->implode(', ') }}
-    @else
-        Nenhuma categoria associado
-    @endif
-</p>
 <hr>
 </div>
 @endforeach
