@@ -7,9 +7,36 @@
     <title>@yield('title')</title>
 </head>
 <body>
-    <a href="{{ route('home') }}">
+<a href="{{ route('home') }}">
     <h1>Scooby-Mooves</h1>
 </a>
+
+<form action="{{ url('/') }}" method="POST">
+    @csrf
+    <div class="input-group">
+        <input type="text" name="busca" placeholder="Buscar Filme">
+        <select name="ano">
+            <option value="">Selecione o Ano</option>
+            @php
+                $currentYear = date('Y');
+                $startYear = 1900;
+            @endphp
+
+            @for ($year = $currentYear; $year >= $startYear; $year--)
+                <option value="{{ $year }}">{{ $year }}</option>
+            @endfor
+        </select>
+
+        <select name="categoria_id">
+            <option value="">Selecione a Categoria</option>
+            @foreach ($categoriaSearch as $categoria)
+                <option value="{{ $categoria->id }}">{{ $categoria->name }}</option>
+            @endforeach
+        </select>
+        <button type="submit">Buscar</button>
+    </div>
+</form>
+
 
     @if (Auth::user())
 <div style="display: inline-block;">

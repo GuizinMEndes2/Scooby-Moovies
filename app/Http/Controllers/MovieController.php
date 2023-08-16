@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,8 +15,9 @@ class MovieController extends Controller
         if (Auth::check()) {
             $userId = $request->user()->id;
         }
+        $categoriaSearch = Categoria::all();
 
         $categorias = $movies->categorias()->pluck('name')->implode(', ');
-        return view('movie.view', compact('movies', 'categorias'));
+        return view('movie.view', compact('movies', 'categorias', 'categoriaSearch'));
     }
 }

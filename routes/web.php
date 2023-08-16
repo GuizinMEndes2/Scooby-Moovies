@@ -5,6 +5,7 @@ use App\Models\Categoria;
 use App\Models\Movie;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,25 @@ use App\Http\Controllers\UserController;
 Route::match(['get', 'post'], '/', function (Request $request) {
     $categorias = Categoria::all();
     $movieQuerry = Movie::query();
+    $categoriaSearch = Categoria::all();
+
+    if ($request->isMethod('POST')) {
+        $busca = $request->busca;
+        $ano = $request->ano;
+        $categoria_id = $request->categoria_id;
+
+        $movieQuerry->where('name', 'LIKE', "%{$busca}%");
+
+        if ($ano) {
+            $movieQuerry->whereRaw('YEAR(ano) = ?', [$ano]);
+        }
+
+        if ($categoria_id) {
+            $movieQuerry->whereHas('categorias', function ($query) use ($categoria_id) {
+                $query->where('categorias.id', $categoria_id);
+            });
+        }
+    }
 
     $movie = $movieQuerry->get();
 
@@ -33,7 +53,11 @@ Route::match(['get', 'post'], '/', function (Request $request) {
 
     $categoriaSelecionado = null;
 
-    return view('welcome', compact('categoriaSelecionado', 'filmes', 'categorias'))->with('movie', $movie);
+    if ($movie->count() === 0) {
+        return view('welcome', compact('categoriaSelecionado', 'categorias', 'categoriaSearch'))->with('movie', $movie)->with('noResults', true);
+    } else {
+        return view('welcome', compact('categoriaSelecionado', 'filmes', 'categorias', 'categoriaSearch'))->with('movie', $movie);
+    }
 })->name('home');
 
 Route::get('/login', [UserController::class, 'login'])->name('login');
