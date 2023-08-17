@@ -1,10 +1,29 @@
-@extends('!layout.layoutAdmin')
 
-@section('title', 'Scooby-Moovies categoria List')
+
+@section('title', 'Scooby-Moovies Categoria List')
 
 @section('content')
+<link rel="stylesheet" href="{{ asset('/css/list.css') }}">
+<link rel="stylesheet" href="{{ asset('/css/layout.css') }}">
 
-<table border="1px black">
+<div class="navbar">
+    <a href="{{ route('home') }}" class="navbar-logo">
+        <h1>Scooby-Mooves</h1>
+    </a>
+
+    <div class="user-info">
+        {{ Auth::user()->name }}
+    </div>
+
+    <div class="admin-links">
+        <a href="{{ route('movie.lista') }}">Lista de Filmes</a>
+        <a href="{{ route('categoria.list') }}">Lista de Categorias</a>
+    </div>
+
+    <a href="{{ route('logout') }}" class="logout-button">Logout</a>
+</div>
+
+<table class="netflix-table">
     <tr>
         <th>Id</th>
         <th>Nome</th>
@@ -21,5 +40,4 @@
     @endforeach
 </table>
 <br>
-<a href="{{ route('categoria.add') }}">Adicionar Categoria</a>
-@endsection
+<a href="{{ route('categoria.add') }}" class="logout-button">Adicionar Categoria</a>

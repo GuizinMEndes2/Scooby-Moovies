@@ -1,53 +1,76 @@
-@extends('!layout.layoutAdmin')
+
 
 @section('title', 'Scooby-Moovies Movie List')
 
 @section('content')
 
 @if (session('sucesso'))
-    <div>{{session('sucesso')}}</div>
+    <div class="success-message">{{session('sucesso')}}</div>
 @endif
 
 @if ($errors)
 @foreach ($errors->all() as $erro)
-    {{$erro}} <br>
+    <div class="error-message">{{$erro}}</div>
     @endforeach
 @endif
 
-<form action="{{ url()->current()}}" method="POST">
-    @csrf
-    <h2>Nome do Filme:</h2>
-    <input type="text" name="name" placeholder="Nome do Filme" value="{{old('name', $movie->name ?? '')}}"><br>
+<link rel="stylesheet" href="{{ asset('/css/form.css') }}">
+<link rel="stylesheet" href="{{ asset('/css/layout.css') }}">
+<link rel="stylesheet" href="{{ asset('/css/add.css') }}">
 
-    <h2>Sinopse do Filme:</h2>
-    <textarea name="sinopse" cols="40" rows="5" placeholder="Sinopse do filme">{{old('sinopse', $movie->sinopse ?? '')}}</textarea><br>
+<div class="navbar">
+    <a href="{{ route('home') }}" class="navbar-logo">
+        <h1>Scooby-Mooves</h1>
+    </a>
 
-    <fieldset style=" margin-right: 90%">
-        <legend style="text-align: left">Data de Publicação:</legend>
-        <input type="date" name="ano" value="{{old('ano', $movie->ano ?? '')}}"> <br>
-    </fieldset>
+    <div class="user-info">
+        {{ Auth::user()->name }}
+    </div>
 
-    @if($movie->imagem)
-    <label for="imagem"> <h2>Imagem atual do livro:</h2></label> <br>
-    <img src="{{ $movie->imagem }}" alt="Imagem antiga do livro" width="200">
-    <br>
-    @else
-    <p>Livro ainda não possui uma imagem</p>
-    @endif
-    <div>
-        <label for="imagem"><h3>Nova imagem do Livro:</h3></label> <br>
-        <input type="text" name="imagem" placeholder="Link da imagem">
-    </div> <br>
+    <div class="admin-links">
+        <a href="{{ route('movie.lista') }}">Lista de Filmes</a>
+        <a href="{{ route('categoria.list') }}">Lista de Categorias</a>
+    </div>
 
-    <div>
-        <label for="link"><h2>Trailer do filme:</h2></label> <br>
-        <input type="text" name="link" placeholder="Link do trailer" value="{{old('link', $movie->link ?? '')}}">
-    </div> <br>
-
-    <input type="submit" value="Gravar">
-</form>
-<br>
-    <a href="{{route('movie.lista')}}">Voltar</a>
+    <a href="{{ route('logout') }}" class="logout-button">Logout</a>
 </div>
+<div class="form-container">
+<form action="{{ url()->current() }}" method="POST" class="netflix-form">
+    @csrf
+    <h2 class="form-heading">Detalhes do Filme</h2>
+    <div class="form-group">
+        <label for="name">Nome do Filme</label>
+        <input type="text" name="name" placeholder="Nome do Filme" value="{{ old('name', $movie->name ?? '') }}">
+    </div>
 
-@endsection
+    <div class="form-group">
+        <label for="sinopse">Sinopse do Filme</label>
+        <textarea name="sinopse" cols="40" rows="5" placeholder="Sinopse do filme">{{ old('sinopse', $movie->sinopse ?? '') }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="ano">Data de Publicação</label>
+        <input type="date" name="ano" value="{{ old('ano', $movie->ano ?? '') }}">
+    </div>
+
+    <div class="form-group">
+        @if($movie->imagem)
+            <label class="image-label">Imagem atual do filme</label>
+            <img src="{{ $movie->imagem }}" alt="Imagem atual do filme" class="current-image">
+        @else
+            <p>O filme ainda não possui uma imagem</p>
+        @endif
+    </div>
+
+    <div class="form-group">
+        <label for="imagem">Nova imagem do filme</label>
+        <input type="text" name="imagem" placeholder="Link da imagem">
+    </div>
+
+    <div class="form-group">
+        <label for="link">Trailer do filme</label>
+        <input type="text" name="link" placeholder="Link do trailer" value="{{ old('link', $movie->link ?? '') }}">
+    </div>
+
+    <input type="submit" value="Gravar" class="netflix-button">
+</form>

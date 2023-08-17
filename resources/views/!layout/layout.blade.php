@@ -41,15 +41,19 @@
 
 
         @if (Auth::user())
-        <div class="admin-links">
-            {{ Auth::user()->name }} <br>
+            <div class="user-info">
+                {{ Auth::user()->name }}
+            </div>
+
             @if (Auth::user()->isAdm)
-                <a href="{{ route('movie.lista') }}">Lista de Filmes</a><br>
-                <a href="{{ route('categoria.list') }}">Lista de Categorias</a><br>
+                <div class="admin-links">
+                    <a href="{{ route('movie.lista') }}">Lista de Filmes</a>
+                    <a href="{{ route('categoria.list') }}">Lista de Categorias</a>
+                </div>
             @endif
         </div>
     
-<a href="{{ route('logout') }}">Logout</a>
+        <a href="{{ route('logout') }}" class="logout-button">Logout</a>
 </div>
 
 @else
