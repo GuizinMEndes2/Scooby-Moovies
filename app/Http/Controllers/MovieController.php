@@ -31,13 +31,5 @@ class MovieController extends Controller
         ]);
     }
 
-    public function categoriaList()
-    {
-        $categorias = Categoria::all();
-        $categoriaSearch = Categoria::all();
 
-        return view('categoria.list', compact('categoriaSearch'), [
-            'categorias' => $categorias,
-        ]);
-    }
 }

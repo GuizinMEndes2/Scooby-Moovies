@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\MovieController;
 use App\Models\Categoria;
 use App\Models\Movie;
@@ -73,4 +74,16 @@ Route::prefix('movie')->group(function () {
     Route::get('/list', [MovieController::class, 'movieList'])->name('movie.lista');
 });
 
-Route::get('/categoriaList', [MovieController::class, 'categoriaList'])->name('categoria.list');
+Route::prefix('categoria')->group(function () {
+    Route::get('/list', [CategoriaController::class, 'categoriaList'])->name('categoria.list');
+
+    Route::get('/add', [CategoriaController::class, 'add'])->name('categoria.add');
+    Route::post('/add', [CategoriaController::class, 'addConfirm'])->name('categoria.addConfirm');
+
+    Route::get('/delete/{categoria}', [CategoriaController::class, 'delete'])->name('categoria.delete');
+    Route::delete('/delete/{categoria}', [CategoriaController::class, 'deleteConfirm'])->name('categoria.deleteConfirm');
+
+    Route::get('/edit/{categoria}', [CategoriaController::class, 'edit'])->name('categoria.edit');
+    Route::post('/edit/{categoria}', [CategoriaController::class, 'editSave'])->name('categoria.editSave');
+
+});

@@ -15,10 +15,11 @@
     <tr>
         <td>{{ $categoria->id }}</td>
         <td>{{ $categoria->name }}</td>
-        {{-- <td><a href="{{ route('book.edit', $categoria->id) }}" class="action-link">Editar</a></td>
-        <td><a href="{{ route('book.delete', $categoria->id) }}" class="action-link">Excluir</a></td> --}}
+        <td><a href="{{ route('categoria.edit', $categoria->id) }}" class="action-link">Editar</a></td>
+        <td><a href="{{ route('categoria.delete', $categoria->id) }}" class="action-link">Excluir</a></td>
     </tr>
     @endforeach
 </table>
-
+<br>
+<a href="{{ route('categoria.add') }}">Adicionar Categoria</a>
 @endsection
