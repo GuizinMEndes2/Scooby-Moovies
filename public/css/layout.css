@@ -1,0 +1,93 @@
+/* Adicione este código CSS ao seu arquivo de estilos */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #141414;
+    color: #fff;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #111;
+    padding: 20px;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-logo {
+    font-size: 24px;
+    color: #e50914;
+    text-decoration: none;
+}
+
+.navbar-logo:hover {
+    color: #fff;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+}
+
+.input-group input[type="text"] {
+    padding: 10px;
+    border: none;
+    border-radius: 5px 0 0 5px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+}
+
+.input-group select {
+    padding: 10px;
+    border: none;
+    border-radius: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+}
+
+.input-group button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    background-color: #e50914;
+    color: #fff;
+    cursor: pointer;
+}
+
+.user-info {
+    text-align: right;
+}
+
+.user-info a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 15px;
+}
+
+.user-info a:hover {
+    text-decoration: underline;
+}
+.admin-links {
+    display: inline-block;
+    color: #fff;
+    margin-top: 10px;
+}
+
+.admin-links a {
+    display: block;
+    margin-bottom: 5px;
+    text-decoration: none;
+    color: #fff;
+}
+
+.admin-links a:hover {
+    text-decoration: underline;
+}
