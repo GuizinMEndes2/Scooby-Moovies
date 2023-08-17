@@ -72,7 +72,9 @@ Route::post('/register', [UserController::class, 'regSuccess'])->name('register.
 Route::prefix('movie')->group(function () {
     Route::middleware(['auth'])->group(function () {
     Route::get('/view/{movie}', [MovieController::class, 'view'])->name('movie.page');
+
     Route::get('/list', [MovieController::class, 'movieList'])->name('movie.lista');
+    Route::post('/list', [MovieController::class, 'movieList'])->name('movie.listaSearch');
 
     Route::get('/add', [MovieController::class, 'add'])->name('movie.add');
     Route::post('/add', [MovieController::class, 'addConfirm'])->name('movie.addConfirm');
@@ -88,6 +90,7 @@ Route::prefix('movie')->group(function () {
 Route::prefix('categoria')->group(function () {
     Route::middleware(['auth'])->group(function () {
     Route::get('/list', [CategoriaController::class, 'categoriaList'])->name('categoria.list');
+    Route::post('/list', [CategoriaController::class, 'categoriaList'])->name('categoria.listSearch');
 
     Route::get('/add', [CategoriaController::class, 'add'])->name('categoria.add');
     Route::post('/add', [CategoriaController::class, 'addConfirm'])->name('categoria.addConfirm');

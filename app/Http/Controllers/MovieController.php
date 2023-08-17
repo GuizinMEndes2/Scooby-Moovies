@@ -28,9 +28,18 @@ class MovieController extends Controller
     }
 
 
-    public function movieList()
+    public function movieList(Request $request)
     {
-        $movies = Movie::all();
+        if ($request->isMethod('POST')) {
+            $busca = $request->busca;
+
+            $movies = Movie::where('name', 'LIKE', "%{$busca}%")
+                ->orWhere('id', $busca)
+                ->orderBy('id')
+                ->get();
+        } else {
+            $movies = Movie::all();
+        }
         $categoriaSearch = Categoria::all();
 
         return view('movie.list', compact('categoriaSearch'), [
@@ -90,4 +99,5 @@ class MovieController extends Controller
 
         return redirect()->route('movie.lista')->with('sucesso', 'Filme alterado com sucesso!');
     }
+
 }

@@ -8,9 +8,18 @@ use Illuminate\Validation\Rule;
 
 class CategoriaController extends Controller
 {
-    public function categoriaList()
+    public function categoriaList(Request $request)
     {
-        $categorias = Categoria::all();
+        if ($request->isMethod('POST')) {
+            $busca = $request->busca;
+
+            $categorias = Categoria::where('name', 'LIKE', "%{$busca}%")
+                ->orWhere('id', $busca)
+                ->orderBy('id')
+                ->get();
+        } else {
+            $categorias = Categoria::all();
+        }
         $categoriaSearch = Categoria::all();
 
         return view('categoria.list', compact('categoriaSearch'), [

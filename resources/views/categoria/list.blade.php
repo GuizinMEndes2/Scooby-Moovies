@@ -1,4 +1,4 @@
-@extends('!layout.layout')
+@extends('!layout.layoutAdmin')
 
 @section('title', 'Scooby-Moovies categoria List')
 
