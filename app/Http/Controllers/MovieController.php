@@ -9,17 +9,23 @@ use Illuminate\Support\Facades\Auth;
 
 class MovieController extends Controller
 {
-    public function view(Movie $movies, Request $request)
+    public function view(Movie $movie, Request $request)
     {
         $userId = null;
         if (Auth::check()) {
             $userId = $request->user()->id;
         }
+
+        $movie->load('categorias');
+
         $categoriaSearch = Categoria::all();
 
-        $categorias = $movies->categorias()->pluck('name')->implode(', ');
-        return view('movie.view', compact('movies', 'categorias', 'categoriaSearch'));
+        return view('movie.view', [
+            'movie' => $movie,
+            'categoriaSearch' => $categoriaSearch,
+        ]);
     }
+
 
     public function movieList()
     {

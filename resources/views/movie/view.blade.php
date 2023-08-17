@@ -6,24 +6,25 @@
 
     <div>
         <div>
+
             <div>
-                @if($movies->imagem)
-                    <img src="{{ $movies->imagem }}" alt="{{ $movies->name }}" width="100">
-                @else
-                    Sem imagem
-                @endif
-            </div>
-            <div>
-                <h1>{{ $movies->name }}</h1>
-                <a href="{{ $movies->link }}">Assistir ao Trailer</a>
+                <h1>{{ $movie->name }}</h1>
+                <div>
+                    @if($movie->imagem)
+                        <img src="{{ $movie->imagem }}" alt="{{ $movie->name }}" width="100">
+                    @else
+                        Sem imagem
+                    @endif
+                </div>
+                <a href="{{ $movie->link }}">Assistir ao Trailer</a>
                 <fieldset>
                     <legend>Sinopse:</legend>
-                    {{ $movies->sinopse }}
+                    {{ $movie->sinopse }}
                 </fieldset>
-                <p>Ano de Publicação: {{ date('Y', strtotime($movies->ano)) }}</p>
+                <p>Ano de Publicação: {{ date('Y', strtotime($movie->ano)) }}</p>
                 <p>Categoria(s):
-                    @if ($movies->categorias->count() > 0)
-                        {{ $movies->categorias->pluck('name')->implode(', ') }}
+                    @if ($movie->categorias->count() > 0)
+                        {{ $movie->categorias->pluck('name')->implode(', ') }}
                     @else
                         Nenhum gênero associado
                     @endif
