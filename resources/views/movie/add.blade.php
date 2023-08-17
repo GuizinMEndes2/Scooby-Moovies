@@ -41,7 +41,7 @@
 
     <div>
         <label for="link"><h2>Trailer do filme:</h2></label> <br>
-        <input type="text" name="link" placeholder="Link do trailer" value="{{old('ano', $movie->link ?? '')}}">
+        <input type="text" name="link" placeholder="Link do trailer" value="{{old('link', $movie->link ?? '')}}">
     </div> <br>
 
     <input type="submit" value="Gravar">

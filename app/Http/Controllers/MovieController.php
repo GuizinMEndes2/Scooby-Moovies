@@ -94,6 +94,10 @@ class MovieController extends Controller
                 'required',
                 Rule::unique('movies')->ignore($movie->id)
             ],
+            'sinopse' => 'string|required',
+            'ano' => 'required',
+            'imagem' => 'string',
+            'link' => 'string|required',
         ]);
         $movie->fill($dados)->save();
 
