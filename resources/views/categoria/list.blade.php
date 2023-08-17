@@ -15,8 +15,8 @@
     <tr>
         <td>{{ $categoria->id }}</td>
         <td>{{ $categoria->name }}</td>
-        <td><a href="{{ route('categoria.edit', $categoria->id) }}" class="action-link">Editar</a></td>
-        <td><a href="{{ route('categoria.delete', $categoria->id) }}" class="action-link">Excluir</a></td>
+        <td><a href="{{ route('categoria.edit', $categoria->id) }}">Editar</a></td>
+        <td><a href="{{ route('categoria.delete', $categoria->id) }}">Excluir</a></td>
     </tr>
     @endforeach
 </table>

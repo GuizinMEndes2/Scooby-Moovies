@@ -59,7 +59,7 @@ Route::match(['get', 'post'], '/', function (Request $request) {
     } else {
         return view('welcome', compact('categoriaSelecionado', 'filmes', 'categorias', 'categoriaSearch'))->with('movie', $movie);
     }
-})->name('home');
+})->name('home')->middleware('auth');
 
 Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::post('/login', [UserController::class, 'login'])->name('login');
@@ -70,11 +70,23 @@ Route::get('/register', [UserController::class, 'register'])->name('register');
 Route::post('/register', [UserController::class, 'regSuccess'])->name('register.addSuccess');
 
 Route::prefix('movie')->group(function () {
+    Route::middleware(['auth'])->group(function () {
     Route::get('/view/{movie}', [MovieController::class, 'view'])->name('movie.page');
     Route::get('/list', [MovieController::class, 'movieList'])->name('movie.lista');
+
+    Route::get('/add', [MovieController::class, 'add'])->name('movie.add');
+    Route::post('/add', [MovieController::class, 'addConfirm'])->name('movie.addConfirm');
+
+    Route::get('/delete/{movie}', [MovieController::class, 'delete'])->name('movie.delete');
+    Route::delete('/delete/{movie}', [MovieController::class, 'deleteConfirm'])->name('movie.deleteConfirm');
+
+    Route::get('/edit/{movie}', [MovieController::class, 'edit'])->name('movie.edit');
+    Route::post('/edit/{movie}', [MovieController::class, 'editSave'])->name('movie.editSave');
+});
 });
 
 Route::prefix('categoria')->group(function () {
+    Route::middleware(['auth'])->group(function () {
     Route::get('/list', [CategoriaController::class, 'categoriaList'])->name('categoria.list');
 
     Route::get('/add', [CategoriaController::class, 'add'])->name('categoria.add');
@@ -85,5 +97,5 @@ Route::prefix('categoria')->group(function () {
 
     Route::get('/edit/{categoria}', [CategoriaController::class, 'edit'])->name('categoria.edit');
     Route::post('/edit/{categoria}', [CategoriaController::class, 'editSave'])->name('categoria.editSave');
-
+});
 });
