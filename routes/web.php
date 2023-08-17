@@ -69,5 +69,8 @@ Route::get('/register', [UserController::class, 'register'])->name('register');
 Route::post('/register', [UserController::class, 'regSuccess'])->name('register.addSuccess');
 
 Route::prefix('movie')->group(function () {
-    Route::get('/{movies}', [MovieController::class, 'view'])->name('movie.page');
+    Route::get('/view/{movie}', [MovieController::class, 'view'])->name('movie.page');
+    Route::get('/list', [MovieController::class, 'movieList'])->name('movie.lista');
 });
+
+Route::get('/categoriaList', [MovieController::class, 'categoriaList'])->name('categoria.list');

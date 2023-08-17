@@ -20,4 +20,24 @@ class MovieController extends Controller
         $categorias = $movies->categorias()->pluck('name')->implode(', ');
         return view('movie.view', compact('movies', 'categorias', 'categoriaSearch'));
     }
+
+    public function movieList()
+    {
+        $movies = Movie::all();
+        $categoriaSearch = Categoria::all();
+
+        return view('movie.list', compact('categoriaSearch'), [
+            'movies' => $movies,
+        ]);
+    }
+
+    public function categoriaList()
+    {
+        $categorias = Categoria::all();
+        $categoriaSearch = Categoria::all();
+
+        return view('categoria.list', compact('categoriaSearch'), [
+            'categorias' => $categorias,
+        ]);
+    }
 }

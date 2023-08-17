@@ -43,7 +43,8 @@
 {{ Auth::user()->name }} <br>
 
 @if (Auth::user() && Auth::user()->isAdm)
-<a href="">Lista de Filmes</a> <br>
+<a href="{{ route('movie.lista') }}">Lista de Filmes</a> <br>
+<a href="{{ route('categoria.list') }}">Lista de Categorias</a> <br>
 @endif
 
 <a href="{{ route('logout') }}">Logout</a>
