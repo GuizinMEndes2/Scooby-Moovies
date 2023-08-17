@@ -17,7 +17,7 @@ class MovieController extends Controller
             $userId = $request->user()->id;
         }
 
-        $movie->load('movies');
+        $movie->load('categorias');
 
         $categoriaSearch = Categoria::all();
 
