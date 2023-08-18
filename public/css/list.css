@@ -58,3 +58,30 @@ td a, .but:hover {
         text-align: center;
     }
 }
+
+.search-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.search-form {
+    display: inline-block;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+}
+
+.search-input {
+    padding: 5px;
+    border: none;
+    background-color: transparent;
+    color: #fff;
+}
+
+.search-button {
+    padding: 5px 10px;
+    background-color: #e50914;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}

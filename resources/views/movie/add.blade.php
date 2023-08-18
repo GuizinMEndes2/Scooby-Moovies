@@ -86,6 +86,7 @@
             @endforeach
         </select>
     </div>
+     <br>
 
 
     <input type="submit" value="Gravar" class="netflix-button">

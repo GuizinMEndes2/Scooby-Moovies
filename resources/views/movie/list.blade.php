@@ -20,12 +20,13 @@
 
     <a href="{{ route('logout') }}" class="logout-button">Logout</a>
 </div>
-
-<form class="search-form" action="{{ url()->current() }}" method="POST">
-    @csrf
-    <input class="search-input" type="text" name="busca" placeholder="Pesquisar...">
-    <button class="search-button" type="submit">Buscar</button>
-</form>
+<div class="search-container">
+    <form class="search-form" action="{{ url()->current() }}" method="POST">
+        @csrf
+        <input class="search-input" type="text" name="busca" placeholder="Pesquisar...">
+        <button class="search-button" type="submit">Buscar</button>
+    </form>
+</div>
 
 <a href="{{route('movie.add')}}" class="but">Adicionar Novo Filme</a>
 
