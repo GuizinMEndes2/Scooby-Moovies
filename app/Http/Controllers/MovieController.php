@@ -63,11 +63,18 @@ class MovieController extends Controller
             'ano' => 'required',
             'imagem' => 'string|required',
             'link' => 'string|required',
+            'categorias' => 'array',
         ]);
 
-        movie::create($dados);
+        $movie = Movie::create($dados);
+
+        if ($form->categorias) {
+            $movie->categorias()->attach($form->categorias);
+        }
+
         return redirect()->route('movie.lista')->with('sucesso', 'Filme adicionado com sucesso!');
     }
+
 
     public function delete(Movie $movie)
     {
@@ -99,6 +106,7 @@ class MovieController extends Controller
             'sinopse' => 'string|required',
             'ano' => 'required',
             'link' => 'string|required',
+            'categorias' => 'array'
         ]);
 
         if (!empty($form->imagem)) {
@@ -106,6 +114,12 @@ class MovieController extends Controller
         }
 
         $movie->fill($dados)->save();
+
+        if ($form->categorias) {
+            $movie->categorias()->sync($form->categorias);
+        } else {
+            $movie->categorias()->detach();
+        }
 
         return redirect()->route('movie.lista')->with('sucesso', 'Filme alterado com sucesso!');
 

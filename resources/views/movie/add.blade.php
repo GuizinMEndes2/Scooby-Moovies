@@ -72,5 +72,21 @@
         <input type="text" name="link" placeholder="Link do trailer" value="{{ old('link', $movie->link ?? '') }}">
     </div>
 
+    <div class="form-group">
+        <label for="categorias">Categorias</label> <br>
+        <select name="categorias[]" multiple>
+            @foreach ($categoriaSearch as $categoria)
+                <option value="{{ $categoria->id }}"
+                    @if ($movie->categorias->contains('id', $categoria->id))
+                        selected
+                    @endif
+                >
+                    {{ $categoria->name }}
+                </option>
+            @endforeach
+        </select>
+    </div>
+
+
     <input type="submit" value="Gravar" class="netflix-button">
 </form>
