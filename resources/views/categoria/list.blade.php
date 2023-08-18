@@ -23,6 +23,15 @@
     <a href="{{ route('logout') }}" class="logout-button">Logout</a>
 </div>
 
+<form class="search-form" action="{{ url()->current() }}" method="POST">
+    @csrf
+    <input class="search-input" type="text" name="busca" placeholder="Pesquisar...">
+    <button class="search-button" type="submit">Buscar</button>
+</form>
+
+<a href="{{ route('categoria.add') }}" class="logout-button">Adicionar Categoria</a>
+
+
 <table class="netflix-table">
     <tr>
         <th>Id</th>
@@ -40,4 +49,3 @@
     @endforeach
 </table>
 <br>
-<a href="{{ route('categoria.add') }}" class="logout-button">Adicionar Categoria</a>
