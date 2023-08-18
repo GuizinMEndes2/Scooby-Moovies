@@ -20,7 +20,17 @@
                 <h2>Sinopse</h2>
                 <p>{{ $movie->sinopse }}</p>
             </div>
-            <p class="release-year">Ano de Publicação: {{ date('Y', strtotime($movie->ano)) }}</p>
+
+            <p class="release-year">
+
+                @if (date('Y', strtotime($movie->ano)) > date('Y'))
+                    Filme irá lançar em: {{ date('Y', strtotime($movie->ano)) }}
+                @else
+                    Ano de Publicação: {{ date('Y', strtotime($movie->ano)) }}
+                @endif
+            </p>
+
+
             <p class="categories">
                 @if ($movie->categorias->count() > 0)
                     {{ $movie->categorias->pluck('name')->implode(', ') }}
