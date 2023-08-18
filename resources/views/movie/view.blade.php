@@ -21,7 +21,7 @@
                 <p>{{ $movie->sinopse }}</p>
             </div>
             <p class="release-year">Ano de Publicação: {{ date('Y', strtotime($movie->ano)) }}</p>
-            <p class="categories">Categoria(s):
+            <p class="categories">
                 @if ($movie->categorias->count() > 0)
                     {{ $movie->categorias->pluck('name')->implode(', ') }}
                 @else

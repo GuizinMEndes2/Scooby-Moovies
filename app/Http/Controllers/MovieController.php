@@ -47,10 +47,12 @@ class MovieController extends Controller
         ]);
     }
 
-    public function add()
+    public function add(Movie $movie)
     {
         $categoriaSearch = Categoria::all();
-        return view('movie.add', compact('categoriaSearch'));
+        return view('movie.add', compact('categoriaSearch'), [
+            'movie' => $movie,
+        ]);
     }
 
     public function addConfirm(Request $form)
@@ -64,7 +66,7 @@ class MovieController extends Controller
         ]);
 
         movie::create($dados);
-        return redirect()->route('movie.add')->with('sucesso', 'Filme adicionado com sucesso!');
+        return redirect()->route('movie.lista')->with('sucesso', 'Filme adicionado com sucesso!');
     }
 
     public function delete(Movie $movie)
@@ -77,7 +79,7 @@ class MovieController extends Controller
     {
         $movie->delete();
 
-        return redirect()->route('movie.list')->with('sucesso', 'Filme apagada com sucesso!');
+        return redirect()->route('movie.lista')->with('sucesso', 'Filme apagada com sucesso!');
     }
 
     public function edit(Movie $movie)
@@ -96,12 +98,17 @@ class MovieController extends Controller
             ],
             'sinopse' => 'string|required',
             'ano' => 'required',
-            'imagem' => 'string',
             'link' => 'string|required',
         ]);
+
+        if (!empty($form->imagem)) {
+            $dados['imagem'] = $form->imagem;
+        }
+
         $movie->fill($dados)->save();
 
         return redirect()->route('movie.lista')->with('sucesso', 'Filme alterado com sucesso!');
+
     }
 
 }

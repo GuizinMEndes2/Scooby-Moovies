@@ -28,7 +28,7 @@ td img {
 }
 
 /* Estilos para os links de ações */
-td a {
+td a, .but {
     text-decoration: none;
     color: #e50914;
     font-size: 14px;
@@ -38,7 +38,7 @@ td a {
     transition: background-color 0.3s, color 0.3s;
 }
 
-td a:hover {
+td a, .but:hover {
     background-color: #e50914;
     color: #fff;
 }
